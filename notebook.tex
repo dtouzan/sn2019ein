@@ -1,0 +1,512 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\TeX{\mbox{T\kern-.14em\lower.5ex\hbox{E}\kern-.115em X}}
+    \def\LaTeX{\mbox{L\kern-.325em\raise.21em\hbox{$\scriptstyle{A}$}\kern-.17em}\TeX}
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{sn2019ein}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+        \PY{k+kn}{import} \PY{n+nn}{numpy}
+        
+        \PY{o}{!}pip install aplpy 
+        \PY{k+kn}{import} \PY{n+nn}{aplpy}
+        \PY{k+kn}{from} \PY{n+nn}{astropy}\PY{n+nn}{.}\PY{n+nn}{io} \PY{k}{import} \PY{n}{ascii}
+        
+        
+        \PY{n}{fig} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{15}\PY{p}{,}\PY{l+m+mi}{9}\PY{p}{)}\PY{p}{)}
+        \PY{n}{f1}\PY{o}{=}\PY{n}{aplpy}\PY{o}{.}\PY{n}{FITSFigure}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{000115\PYZhy{}20190513211556.fits}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{figure}\PY{o}{=}\PY{n}{fig}\PY{p}{,} \PY{n}{subplot}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+        \PY{n}{f1}\PY{o}{.}\PY{n}{add\PYZus{}grid}\PY{p}{(}\PY{p}{)}
+        \PY{n}{f1}\PY{o}{.}\PY{n}{tick\PYZus{}labels}\PY{o}{.}\PY{n}{set\PYZus{}font}\PY{p}{(}\PY{n}{size}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{small}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{}f1.show\PYZus{}markers(208.37179, 40.27616, edgecolor=\PYZsq{}red\PYZsq{}, facecolor=\PYZsq{}none\PYZsq{}, marker=\PYZsq{}o\PYZsq{}, s=40, alpha=0.8)}
+        \PY{n}{f1}\PY{o}{.}\PY{n}{show\PYZus{}grayscale}\PY{p}{(}\PY{n}{vmin}\PY{o}{=}\PY{l+m+mi}{1300}\PY{p}{,} \PY{n}{vmax}\PY{o}{=}\PY{l+m+mi}{9000}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{}gc.show\PYZus{}contour(colors=\PYZsq{}white\PYZsq{},alpha=0.5)}
+        \PY{c+c1}{\PYZsh{}f1.show\PYZus{}colorscale(cmap=\PYZsq{}gist\PYZus{}heat\PYZsq{})}
+        
+        
+        \PY{n}{f2} \PY{o}{=} \PY{n}{aplpy}\PY{o}{.}\PY{n}{FITSFigure}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{000120\PYZhy{}20190531215057.fits}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{figure}\PY{o}{=}\PY{n}{fig}\PY{p}{,} \PY{n}{subplot}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}
+        \PY{n}{f2}\PY{o}{.}\PY{n}{add\PYZus{}grid}\PY{p}{(}\PY{p}{)}
+        \PY{n}{f2}\PY{o}{.}\PY{n}{tick\PYZus{}labels}\PY{o}{.}\PY{n}{set\PYZus{}font}\PY{p}{(}\PY{n}{size}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{small}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{f2}\PY{o}{.}\PY{n}{show\PYZus{}grayscale}\PY{p}{(}\PY{n}{vmin}\PY{o}{=}\PY{l+m+mi}{373}\PY{p}{,} \PY{n}{vmax}\PY{o}{=}\PY{l+m+mi}{4700}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{}gc.show\PYZus{}contour(colors=\PYZsq{}white\PYZsq{},alpha=0.5)}
+        \PY{c+c1}{\PYZsh{}gc.show\PYZus{}colorscale(cmap=\PYZsq{}gist\PYZus{}heat\PYZsq{})}
+        
+        \PY{n}{fig}\PY{o}{.}\PY{n}{canvas}\PY{o}{.}\PY{n}{draw}\PY{p}{(}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{}f1.add\PYZus{}colorbar()}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Collecting aplpy
+  Downloading https://files.pythonhosted.org/packages/92/5b/cb15d46774105bc536165f2ffa9e114509915f5983c51666512752635b8c/APLpy-2.0.3-py2.py3-none-any.whl (89kB)
+     |████████████████████████████████| 92kB 2.5MB/s eta 0:00:011
+Requirement already satisfied: matplotlib>=2.0 in /home/nbuser/anaconda3\_420/lib/python3.5/site-packages (from aplpy) (2.1.1)
+Requirement already satisfied: numpy in /home/nbuser/anaconda3\_420/lib/python3.5/site-packages (from aplpy) (1.16.3)
+Requirement already satisfied: pillow>=4.0 in /home/nbuser/anaconda3\_420/lib/python3.5/site-packages (from aplpy) (4.3.0)
+Collecting shapely>=1.6 (from aplpy)
+  Downloading https://files.pythonhosted.org/packages/a2/6c/966fa320a88fc685c956af08135855fa84a1589631256abebf73721c26ed/Shapely-1.6.4.post2-cp35-cp35m-manylinux1\_x86\_64.whl (1.5MB)
+     |████████████████████████████████| 1.5MB 8.5MB/s eta 0:00:01
+Collecting pyregion>=2.0 (from aplpy)
+  Downloading https://files.pythonhosted.org/packages/9d/e9/739397a25a6197f9af396e8ab249ea04d3cc2eb32e96870e2aafcfccf7f4/pyregion-2.0.tar.gz (1.1MB)
+     |████████████████████████████████| 1.1MB 32.3MB/s eta 0:00:01
+Collecting reproject>=0.4 (from aplpy)
+  Downloading https://files.pythonhosted.org/packages/80/d4/4368ac28ca13a5d61b6cb2da74838f070b9dc2b6f3ccacafbc3e200905eb/reproject-0.5-cp35-cp35m-manylinux1\_x86\_64.whl (384kB)
+     |████████████████████████████████| 389kB 9.8MB/s eta 0:00:01
+Collecting astropy>=3.1 (from aplpy)
+  Downloading https://files.pythonhosted.org/packages/4f/ee/e9aa142abcd9480093b337d97d981fc446a3f3996070bc4d7220babe1d07/astropy-3.2.1-cp35-cp35m-manylinux1\_x86\_64.whl (6.3MB)
+     |████████████████████████████████| 6.3MB 14.1MB/s eta 0:00:01
+Collecting scikit-image>=0.14 (from aplpy)
+  Downloading https://files.pythonhosted.org/packages/00/ba/9688afba6ab3714875a8d22284ce0362086e47f3cda60243e5d4de5e5943/scikit\_image-0.15.0-cp35-cp35m-manylinux1\_x86\_64.whl (26.2MB)
+     |████████████████████████████████| 26.2MB 41kB/s  eta 0:00:01    |██                              | 1.6MB 949kB/s eta 0:00:26     |████████████████████            | 16.4MB 7.4MB/s eta 0:00:02
+Collecting pyavm>=0.9.4 (from aplpy)
+  Downloading https://files.pythonhosted.org/packages/dc/5c/da82e7976856dbea5e3b79815e59c0614406601cc628dc2ded65fd9da4f1/PyAVM-0.9.4-py2.py3-none-any.whl (379kB)
+     |████████████████████████████████| 389kB 25.3MB/s eta 0:00:01
+Requirement already satisfied: six>=1.10 in /home/nbuser/anaconda3\_420/lib/python3.5/site-packages (from matplotlib>=2.0->aplpy) (1.11.0)
+Requirement already satisfied: python-dateutil>=2.0 in /home/nbuser/anaconda3\_420/lib/python3.5/site-packages (from matplotlib>=2.0->aplpy) (2.7.5)
+Requirement already satisfied: pytz in /home/nbuser/anaconda3\_420/lib/python3.5/site-packages (from matplotlib>=2.0->aplpy) (2016.6.1)
+Requirement already satisfied: cycler>=0.10 in /home/nbuser/anaconda3\_420/lib/python3.5/site-packages (from matplotlib>=2.0->aplpy) (0.10.0)
+Requirement already satisfied: pyparsing!=2.0.4,!=2.1.2,!=2.1.6,>=2.0.1 in /home/nbuser/anaconda3\_420/lib/python3.5/site-packages (from matplotlib>=2.0->aplpy) (2.1.4)
+Requirement already satisfied: olefile in /home/nbuser/anaconda3\_420/lib/python3.5/site-packages (from pillow>=4.0->aplpy) (0.44)
+Requirement already satisfied: Cython in /home/nbuser/anaconda3\_420/lib/python3.5/site-packages (from pyregion>=2.0->aplpy) (0.24.1)
+Collecting astropy-healpix>=0.2 (from reproject>=0.4->aplpy)
+  Downloading https://files.pythonhosted.org/packages/cb/c3/4572508a722d9a39790f06d6c76d667a5b0c69300b1cf7684e0fe41e87b5/astropy\_healpix-0.4-cp35-cp35m-manylinux1\_x86\_64.whl (202kB)
+     |████████████████████████████████| 204kB 32.9MB/s eta 0:00:01
+Requirement already satisfied: scipy>=0.9 in /home/nbuser/anaconda3\_420/lib/python3.5/site-packages (from reproject>=0.4->aplpy) (1.1.0)
+Collecting networkx>=2.0 (from scikit-image>=0.14->aplpy)
+  Downloading https://files.pythonhosted.org/packages/85/08/f20aef11d4c343b557e5de6b9548761811eb16e438cee3d32b1c66c8566b/networkx-2.3.zip (1.7MB)
+     |████████████████████████████████| 1.8MB 25.3MB/s eta 0:00:01
+Requirement already satisfied: PyWavelets>=0.4.0 in /home/nbuser/anaconda3\_420/lib/python3.5/site-packages (from scikit-image>=0.14->aplpy) (1.0.3)
+Collecting imageio>=2.0.1 (from scikit-image>=0.14->aplpy)
+  Downloading https://files.pythonhosted.org/packages/af/0a/943c965d372dae0b1f1482677d29030ab834351a61a9a632fd62f27f1523/imageio-2.5.0-py3-none-any.whl (3.3MB)
+     |████████████████████████████████| 3.3MB 19.5MB/s eta 0:00:01
+Collecting decorator>=4.3.0 (from networkx>=2.0->scikit-image>=0.14->aplpy)
+  Using cached https://files.pythonhosted.org/packages/5f/88/0075e461560a1e750a0dcbf77f1d9de775028c37a19a346a6c565a257399/decorator-4.4.0-py2.py3-none-any.whl
+Building wheels for collected packages: pyregion, networkx
+  Building wheel for pyregion (setup.py) {\ldots} done
+  Stored in directory: /home/nbuser/.cache/pip/wheels/ca/2c/2b/c95350df7d42ba9044b7528c5ba549bead550433b189008a7f
+  Building wheel for networkx (setup.py) {\ldots} done
+  Stored in directory: /home/nbuser/.cache/pip/wheels/de/63/64/3699be2a9d0ccdb37c7f16329acf3863fd76eda58c39c737af
+Successfully built pyregion networkx
+Installing collected packages: shapely, astropy, pyregion, astropy-healpix, reproject, decorator, networkx, imageio, scikit-image, pyavm, aplpy
+  Found existing installation: astropy 1.2.1
+    Uninstalling astropy-1.2.1:
+      Successfully uninstalled astropy-1.2.1
+  Found existing installation: decorator 4.0.10
+    Uninstalling decorator-4.0.10:
+      Successfully uninstalled decorator-4.0.10
+  Found existing installation: networkx 1.11
+    Uninstalling networkx-1.11:
+      Successfully uninstalled networkx-1.11
+  Found existing installation: scikit-image 0.13.0
+    Uninstalling scikit-image-0.13.0:
+      Successfully uninstalled scikit-image-0.13.0
+Successfully installed aplpy-2.0.3 astropy-3.2.1 astropy-healpix-0.4 decorator-4.4.0 imageio-2.5.0 networkx-2.3 pyavm-0.9.4 pyregion-2.0 reproject-0.5 scikit-image-0.15.0 shapely-1.6.4.post2
+\textcolor{ansi-yellow}{WARNING: You are using pip version 19.1, however version 19.1.1 is available.
+You should consider upgrading via the 'pip install --upgrade pip' command.}
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_0_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subparagraph{\texorpdfstring{Recherche de la magnitude de sn 2019ein
+avec la formule de
+l'\textbf{AAVSO}.}{Recherche de la magnitude de sn 2019ein avec la formule de l'AAVSO .}}\label{recherche-de-la-magnitude-de-sn-2019ein-avec-la-formule-de-laavso-.}
+
+\textgreater{}Lecture du fichier sn2019ein\_UT1.csv qui contient les
+variables suivante sur la 2ème ligne puis applique la formule
+\textbf{\emph{mag1 - mag2 = -2,5 log10 (flux1 / flux2)}}. -
+\textbf{\emph{JD}} : Jour julien de la mesure - \textbf{\emph{Vadu}} :
+Mesure de l'intensité de la variable - \textbf{\emph{Cadu}} : Mesure de
+l'intensité de la constante
+
+\textgreater{}La Valeur \emph{Vmag} de la constante a été prise du
+catalogue \textbf{\emph{UCAC4}}.
+
+\textgreater{}Lecture du fichier sn2019ein\_AAVSO.csv qui contient
+toutes les mesures téléchargées sur le site de l'AAVSO et affichage des
+deux courbes
+
+\textbf{Conclusion} : Une perte évidente de luminosité d'environ 1
+magnitude entre le 13/05/219 et le 31/05/2019 qui se voit très bien sur
+les deux images précédentes. Une constante (\emph{0,15}) pour le filtre
+CLS-CCD a été ajoutée pour le calcul de la magnitude et la superposition
+des deux courbes.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{k+kn}{from} \PY{n+nn}{astropy}\PY{n+nn}{.}\PY{n+nn}{io} \PY{k}{import} \PY{n}{ascii}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+        
+        \PY{c+c1}{\PYZsh{} Calcul de la magnitude}
+        
+        \PY{n}{data} \PY{o}{=} \PY{n}{ascii}\PY{o}{.}\PY{n}{read}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{sn2019ein\PYZus{}UT1.csv}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{data\PYZus{}start}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,}\PY{n+nb}{format}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{data}\PY{p}{)}
+        
+        \PY{n}{Vmag}\PY{o}{=}\PY{p}{[}\PY{p}{]}
+        \PY{n}{Cmag}\PY{o}{=}\PY{p}{[}\PY{p}{]}
+        \PY{n}{julian\PYZus{}day}\PY{o}{=}\PY{p}{[}\PY{p}{]}
+        \PY{n}{CLS\PYZus{}CCD\PYZus{}filter\PYZus{}constante}\PY{o}{=}\PY{l+m+mf}{0.15}
+        
+        \PY{k}{for} \PY{n}{line} \PY{o+ow}{in} \PY{n}{data}\PY{p}{:}
+            \PY{n}{name\PYZus{}constante}\PY{o}{=}\PY{n}{line}\PY{p}{[}\PY{l+m+mi}{7}\PY{p}{]}
+            \PY{n}{Vadu} \PY{o}{=} \PY{n+nb}{float}\PY{p}{(}\PY{n}{line}\PY{p}{[}\PY{l+m+mi}{24}\PY{p}{]}\PY{p}{)}
+            \PY{n}{Cadu} \PY{o}{=} \PY{n+nb}{float}\PY{p}{(}\PY{n}{line}\PY{p}{[}\PY{l+m+mi}{25}\PY{p}{]}\PY{p}{)}
+            \PY{n}{Cmag\PYZus{}UCAC4} \PY{o}{=} \PY{n+nb}{float}\PY{p}{(}\PY{n}{line}\PY{p}{[}\PY{l+m+mi}{14}\PY{p}{]}\PY{p}{)}
+            \PY{n}{Cmag}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{Cmag\PYZus{}UCAC4}\PY{p}{)}
+            \PY{n}{julian\PYZus{}day}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n+nb}{float}\PY{p}{(}\PY{n}{line}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+            \PY{c+c1}{\PYZsh{} mag1 \PYZhy{} mag2 = \PYZhy{}2,5 log10 (flux1 / flux2) }
+            \PY{n}{Vmag}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mf}{2.5}\PY{o}{*}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{log10}\PY{p}{(}\PY{n}{Vadu}\PY{o}{/}\PY{n}{Cadu}\PY{p}{)}\PY{p}{)}\PY{o}{+}\PY{n}{Cmag\PYZus{}UCAC4}\PY{o}{+}\PY{n}{CLS\PYZus{}CCD\PYZus{}filter\PYZus{}constante}\PY{p}{)}
+        
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Magnitudes :}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{Vmag}\PY{p}{)}
+        
+        \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{gca}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{invert\PYZus{}yaxis}\PY{p}{(}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{,}\PY{n}{Vmag}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{gs}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sn 2019ein}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{,}\PY{n}{Cmag}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZhy{}\PYZhy{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{n}{name\PYZus{}constante}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{n}{loc}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{upper right}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{8}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{JD}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{V.mag}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sn 2019ein}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{xticks}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{,}\PY{n}{julian\PYZus{}day}\PY{p}{,}\PY{n}{rotation}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} AAVSO courbe}
+        
+        \PY{n}{name\PYZus{}AAVSO}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{AAVSO}\PY{l+s+s2}{\PYZdq{}}
+        \PY{n}{name\PYZus{}UT1}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{UT1}\PY{l+s+s2}{\PYZdq{}}
+        \PY{n}{band}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{V}\PY{l+s+s2}{\PYZdq{}}
+        \PY{n}{band\PYZus{}UT1}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{CLS}\PY{l+s+s2}{\PYZdq{}}
+        
+        \PY{n}{x\PYZus{}AAVSO}\PY{o}{=}\PY{p}{[}\PY{p}{]}
+        \PY{n}{y\PYZus{}AAVSO}\PY{o}{=}\PY{p}{[}\PY{p}{]}
+        
+        \PY{n}{data\PYZus{}AAVSO} \PY{o}{=} \PY{n}{ascii}\PY{o}{.}\PY{n}{read}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{sn2019ein\PYZus{}AAVSO.csv}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{data\PYZus{}start}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,}\PY{n+nb}{format}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        
+        \PY{k}{for} \PY{n}{line} \PY{o+ow}{in} \PY{n}{data\PYZus{}AAVSO}\PY{p}{:}
+            \PY{k}{if} \PY{n}{line}\PY{p}{[}\PY{l+m+mi}{4}\PY{p}{]} \PY{o}{==} \PY{n}{band}\PY{p}{:}
+                \PY{n}{x\PYZus{}AAVSO}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n+nb}{float}\PY{p}{(}\PY{n}{line}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+                \PY{n}{y\PYZus{}AAVSO}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n+nb}{float}\PY{p}{(}\PY{n}{line}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+        
+        \PY{n}{fig}\PY{o}{=}\PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{8}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{)}
+        \PY{n}{fig}\PY{o}{.}\PY{n}{gca}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{invert\PYZus{}yaxis}\PY{p}{(}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{grid}\PY{p}{(}\PY{k+kc}{True}\PY{p}{,}\PY{n}{figure}\PY{o}{=}\PY{n}{fig}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x\PYZus{}AAVSO}\PY{p}{,}\PY{n}{y\PYZus{}AAVSO}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{s}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{green}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{markersize}\PY{o}{=}\PY{l+m+mi}{5}\PY{p}{,} \PY{n}{alpha}\PY{o}{=}\PY{l+m+mf}{0.3}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{n}{name\PYZus{}AAVSO}\PY{o}{+}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ Band }\PY{l+s+s2}{\PYZdq{}}\PY{o}{+}\PY{n}{band}\PY{p}{,} \PY{n}{figure}\PY{o}{=}\PY{n}{fig}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{julian\PYZus{}day}\PY{p}{,}\PY{n}{Vmag}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{o}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{red}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{markersize}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{,} \PY{n}{alpha}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{n}{name\PYZus{}UT1}\PY{o}{+}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ Band }\PY{l+s+s2}{\PYZdq{}}\PY{o}{+}\PY{n}{band\PYZus{}UT1}\PY{p}{,} \PY{n}{figure}\PY{o}{=}\PY{n}{fig}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{julian\PYZus{}day}\PY{p}{,}\PY{n}{Cmag}\PY{p}{,} \PY{n}{ls}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{n}{name\PYZus{}constante}\PY{p}{,} \PY{n}{figure}\PY{o}{=}\PY{n}{fig}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{JD}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{V.mag}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{n}{loc}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{lower right}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{8}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+     JD      Magnitude Uncertainty HQuncertainty {\ldots} Credit  Vadu  Cadu
+------------ --------- ----------- ------------- {\ldots} ------ ----- -----
+2458617.4583        --          --            -- {\ldots}     -- 61339 34178
+2458635.4583        --          --            -- {\ldots}     -- 21951 25021
+Magnitudes : [14.085024884930274, 14.862125882876091]
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_2_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_2_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}0}]:} \PY{o}{!}pip install \PYZhy{}q aplpy
+\end{Verbatim}
+
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
